@@ -1,4 +1,19 @@
 Rails.application.routes.draw do
+  get "reviews/create"
+  get "reviews/edit"
+  get "reviews/update"
+  get "reviews/destroy"
+  get "movies/index"
+  get "movies/show"
+  get "movies/new"
+  get "movies/create"
+  get "movies/edit"
+  get "movies/update"
+  get "movies/destroy"
+
+  resources :movies do
+  resources :reviews, only: [:create, :edit, :update, :destroy]
+  end
   devise_for :users
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
