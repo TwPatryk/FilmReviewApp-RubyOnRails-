@@ -1,4 +1,56 @@
-<div>
-  <h1 class="font-bold text-4xl">Movies#show</h1>
-  <p>Find me in app/views/movies/show.html.erb</p>
+<div class="bg-white p-6 rounded shadow mb-6">
+  <h1 class="text-3xl font-bold mb-2"><%= @movie.title %></h1>
+  <p class="text-gray-700 mb-1">Reżyser: <%= @movie.director %></p>
+  <p class="text-gray-700 mb-1">Premiera: <%= @movie.release_date %></p>
+  <p class="text-gray-700 mb-4"><%= @movie.description %></p>
+  <p class="text-lg font-semibold">⭐ Średnia: <%= @movie.average_rating %></p>
+
+  <% if user_signed_in? %>
+    <div class="mt-4 space-x-2">
+      <%= link_to "Edytuj", edit_movie_path(@movie), class: "bg-yellow-500 text-white px-3 py-1 rounded" %>
+      <%= link_to "Usuń", @movie, data: { turbo_method: :delete, turbo_confirm: "Na pewno?" }, class: "bg-red-600 text-white px-3 py-1 rounded" %>
+    </div>
+  <% end %>
+</div>
+
+<h2 class="text-xl font-bold mb-3">Recenzje</h2>
+
+<% if @reviews.any? %>
+  <div class="space-y-3 mb-6">
+    <% @reviews.each do |review| %>
+      <div class="bg-white p-4 rounded shadow">
+        <p class="font-semibold">⭐ <%= review.rating %>/5</p>
+        <p><%= review.comment %></p>
+        <p class="text-sm text-gray-500">Autor: <%= review.user.email %></p>
+        <% if user_signed_in? && review.user == current_user %>
+          <%= link_to "Usuń recenzję", movie_review_path(review.movie, review), data: { turbo_method: :delete, turbo_confirm: "Na pewno?" }, class: "text-red-600 text-sm" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-gray-600 mb-6">Brak recenzji.</p>
+<% end %>
+
+<% if user_signed_in? %>
+  <div class="bg-white p-4 rounded shadow">
+    <h3 class="font-semibold mb-2">Dodaj recenzję</h3>
+    <%= form_with model: [@movie, @review] do |f| %>
+      <div class="mb-2">
+        <%= f.label :rating, "Ocena (1-5)", class: "block text-sm font-medium" %>
+        <%= f.number_field :rating, min: 1, max: 5, class: "border rounded px-2 py-1 w-20" %>
+      </div>
+      <div class="mb-2">
+        <%= f.label :comment, "Komentarz", class: "block text-sm font-medium" %>
+        <%= f.text_area :comment, rows: 3, class: "border rounded px-2 py-1 w-full" %>
+      </div>
+      <%= f.submit "Dodaj recenzję", class: "bg-blue-600 text-white px-4 py-2 rounded" %>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-gray-600"><%= link_to "Zaloguj się", new_user_session_path, class: "text-blue-600 underline" %>, aby dodać recenzję.</p>
+<% end %>
+
+<div class="mt-6">
+  <%= link_to "← Wróć do listy filmów", movies_path, class: "text-blue-600 underline" %>
 </div>
