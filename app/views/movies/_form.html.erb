@@ -1,0 +1,39 @@
+<%= form_with model: @movie do |f| %>
+  <% if @movie.errors.any? %>
+    <div class="bg-red-100 text-red-800 p-3 rounded mb-4">
+      <p class="font-semibold">Popraw błędy:</p>
+      <ul class="list-disc list-inside">
+        <% @movie.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3">
+    <%= f.label :title, "Tytuł", class: "block font-medium" %>
+    <%= f.text_field :title, class: "border rounded px-2 py-1 w-full" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :director, "Reżyser", class: "block font-medium" %>
+    <%= f.text_field :director, class: "border rounded px-2 py-1 w-full" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :release_date, "Data premiery", class: "block font-medium" %>
+    <%= f.date_field :release_date, class: "border rounded px-2 py-1 w-full" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :description, "Opis", class: "block font-medium" %>
+    <%= f.text_area :description, rows: 4, class: "border rounded px-2 py-1 w-full" %>
+  </div>
+
+  <div class="mb-3">
+    <%= f.label :poster_url, "URL plakatu", class: "block font-medium" %>
+    <%= f.text_field :poster_url, class: "border rounded px-2 py-1 w-full" %>
+  </div>
+
+  <%= f.submit "Zapisz", class: "bg-blue-600 text-white px-4 py-2 rounded" %>
+<% end %>
