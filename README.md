@@ -1,24 +1,21 @@
-# README
+# 🎬 FilmReview
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Prosta aplikacja webowa stworzona w Ruby on Rails, służąca do oceniania i komentowania filmów.
 
-Things you may want to cover:
+## ✨ Główne funkcje
+- Przeglądanie listy filmów wraz ze średnią oceną.
+- Szczegółowy widok filmu (opis, reżyser, data premiery).
+- System rejestracji i logowania użytkowników (Devise).
+- Dodawanie, edytowanie i usuwanie filmów (tylko dla zalogowanych).
+- Dodawanie recenzji (ocena w skali 1-5 + komentarz) oraz ich usuwanie przez autora.
 
-* Ruby version
+## 🛠️ Technologie
+- **Backend:** Ruby on Rails 8.x
+- **Baza danych:** PostgreSQL
+- **Frontend:** ERB, Tailwind CSS (poprzez `tailwindcss-rails`)
+- **Uwierzytelnianie:** Devise
+- **Testy:** RSpec, FactoryBot, Capybara
 
-* System dependencies
+## 🚀 Uruchomienie lokalne
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Aby uruchomić projekt na swoim komputerze, potrzebujesz zainstalowanego Ruby (w wersji 3.x) oraz PostgreSQL.
